@@ -1,0 +1,11 @@
+{
+    "name": "surveillance-client",
+    "version": "0.1.0",
+    "description": "surveillance client",
+    "scripts": {
+        "start": "static --cache 1"
+    },
+    "author": "turunco",
+    "license": "ISC",
+    "devDependencies": {}
+}
