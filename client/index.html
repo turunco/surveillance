@@ -7,8 +7,10 @@
 
     <script type="text/javascript">
         window.onload = function() {
-            var video = document.getElementById('video');
 
+            // show the video from camera
+
+            var video = document.getElementById('video');
             if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                 navigator.mediaDevices.getUserMedia({
                     video: true
@@ -18,18 +20,51 @@
                 }).catch(e => console.error(e));
             }
 
+            // show the captured image from video
+
             var canvas = document.getElementById('canvas');
             var context = canvas.getContext('2d');
+            // console.log(canvas.toDataURL()); // base64, PNG
             var video = document.getElementById('video');
-
             var interval_id = setInterval(() => {
                 context.drawImage(video, 0, 0, 440, 440);
+                // TODO : send image to server
             }, 3000);
+
+            // GPS
+
+            if (navigator.geolocation) {
+                console.log('GPS available');
+                let option = {
+                    enableHighAccuracy: true,
+                    timeout: 8000, // msec
+                    maximumAge: 10000 // msec
+                };
+                navigator.geolocation.getCurrentPosition((pos) => {
+                    console.log('+ success:', pos);
+                    var date = new Date(pos.timestamp);
+                    var gps_str = 'coords(' + 'accuracy=' + pos.coords.accuracy +
+                        ', altitude=' + pos.coords.altitude +
+                        ', altitudeAccuracy=' + pos.coords.altitudeAccuracy +
+                        ', heading=' + pos.coords.heading +
+                        ', latitude=' + pos.coords.latitude +
+                        ', longitude=' + pos.coords.longitude +
+                        ', speed=' + pos.coords.speed +
+                        '), timestamp=' + date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
+                    var gps_elm = document.getElementById('gps');
+                    gps_elm.innerText = gps_str;
+
+                }, (err) => {
+                    console.log('+ error:', err);
+
+                }, option);
+            }
         }
     </script>
 </head>
 
 <body>
+    <div id="gps">...</div>
     <video id="video" width="640" height="480" autoplay></video>
     <canvas id="canvas" width="440" height="440"></canvas>
 </body>
