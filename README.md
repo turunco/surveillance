@@ -5,9 +5,9 @@ Client web application sends those photographs to the server.<br>
 Server saves those photographs to the storage.<br>
 
 ## Warn
-- cut corners :P
--- Error checks
--- Need to register `http://localhost:8080/` to whitelist of CORS
+- Cut corners :P<br>
+  - Error checks<br>
+  - Need to register `http://localhost:8080/` to whitelist of CORS<br>
 
 ## Preparation.
 - USB Video camera
