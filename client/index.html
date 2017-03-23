@@ -17,18 +17,34 @@
                 }).then(function(stream) {
                     video.src = window.URL.createObjectURL(stream);
                     video.play();
-                }).catch(e => console.error(e));
+                }).catch(e => {
+                    console.error(e);
+                    return;
+                });
             }
 
             // show the captured image from video
 
             var canvas = document.getElementById('canvas');
             var context = canvas.getContext('2d');
-            // console.log(canvas.toDataURL()); // base64, PNG
             var video = document.getElementById('video');
             var interval_id = setInterval(() => {
                 context.drawImage(video, 0, 0, 440, 440);
-                // TODO : send image to server
+                canvas.toBlob((blob) => {
+                    // console.log(blob);
+
+                    // send image to server
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('POST', 'http://localhost:8888/upload', true);
+                    xhr.upload.onprogress = (e) => {
+                        if (e.lengthComputable) {
+                            console.log(e.loaded / e.total * 100, '%');
+                        }
+                    };
+
+                    xhr.send(blob);
+                });
             }, 3000);
 
             // GPS

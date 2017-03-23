@@ -4,6 +4,11 @@ Capture photographs by video camera.<br>
 Client web application sends those photographs to the server.<br>
 Server saves those photographs to the storage.<br>
 
+## Warn
+- cut corners :P
+-- Error checks
+-- Need to register `http://localhost:8080/` to whitelist of CORS
+
 ## Preparation.
 - USB Video camera
 
@@ -12,12 +17,10 @@ Server saves those photographs to the storage.<br>
 > cd client
 > npm install
 ```
-Access [http://localhost:8080/](http://localhost:8080/) by web browser.
-
 
 ### server
 ```
->
+- Nothing.
 ```
 
 
@@ -31,5 +34,12 @@ Access [http://localhost:8080/](http://localhost:8080/) by web browser.
 
 ### server
 ```
->
+> node main.js
 ```
+
+
+## References
+- Client :<br>
+ Video capture - [https://www.html5rocks.com/en/tutorials/getusermedia/intro/](https://www.html5rocks.com/en/tutorials/getusermedia/intro/)<br>
+GPS - [https://www.w3.org/TR/geolocation-API/](https://www.w3.org/TR/geolocation-API/)<br>
+- Server : [http://www.nodebeginner.org/](http://www.nodebeginner.org/)<br>
